@@ -73,7 +73,7 @@ def prepare_data(
             values = df[col].values.astype(np.float32)
 
             # Discretize
-            binned = discretize_column(values, col_sharpness)
+            binned, min_val, max_val, step = discretize_column(values, col_sharpness)
 
             # Check coverage
             unique, counts = np.unique(binned, return_counts=True)
@@ -87,7 +87,10 @@ def prepare_data(
                 'type': 'quantitative',
                 'sharpness': col_sharpness,
                 'intervals': len(unique),
-                'min_count': min_count
+                'min_count': min_count,
+                'min_val': float(min_val),
+                'max_val': float(max_val),
+                'step': float(step)
             }
 
     # Process categorical columns
