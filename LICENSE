@@ -1,36 +1,21 @@
+MIT License
 
-### 📝 **Файл `tests/test_basic.py`:**
+Copyright (c) 2026 Александр
 
-```python
-"""Basic tests for ih-prep."""
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-import pytest
-import pandas as pd
-import numpy as np
-from ih_prep import prepare_data
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-def test_basic_preparation():
-    """Test with minimal data."""
-    df = pd.DataFrame({
-        'x': [1.0, 2.0, 3.0],
-        'y': ['a', 'b', 'c'],
-        'target': [0, 1, 0]
-    })
-
-    data, info = prepare_data(df, target='target', sharpness=0.5)
-
-    assert data.shape == (3, 3)
-    assert data.dtype == np.int32
-    assert 'target' in info['columns']
-
-def test_categorical_na():
-    """Test NaN handling in categorical."""
-    df = pd.DataFrame({
-        'cat': ['a', 'b', None],
-        'target': [0, 1, 0]
-    })
-
-    data, info = prepare_data(df, target='target', sharpness=0.5)
-
-    # NaN should be encoded as separate category
-    assert len(info['categorical']['cat']['categories']) == 3
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
